@@ -96,7 +96,7 @@ Hand → Ultrasonic Sensor → Arduino Uno → USB Serial → Android App → Pa
 
 The app reads serial data from Arduino Uno via USB OTG.
 
-Paddle moves vertically according to hand distance.
+Paddle moves horizontally according to hand distance.
 
 Ball movement and collisions are handled inside the app.
 
