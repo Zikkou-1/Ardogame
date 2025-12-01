@@ -1,5 +1,5 @@
 # Ardogame                              
-![Description of image](https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZulwwfJK_GxBJZKrEA3JfHk24SFMwdUqqC7vrHcsAsU3v6OPDCWqOb9Q4OKZMtxUSHBarGZCRONi8DaI7FRNtP2UkV0oFX41suBPQIDlZRnbRtRBj51bni0QVnpGk-f1uXd4aJZQjCwY/s1264/Space.jpg)
+![Screen shot from astroDash](./screenshot.jpg)
 ## Description
 AstroDash:
 
