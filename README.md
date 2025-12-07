@@ -6,7 +6,7 @@ The goal is simple : **replace traditional touchscreen controls with a physical 
 
 by combining an Arduino-based sensor board with an Anrdoid game, Ardogame introduces an entirely new way to interact with mobile games.
 
-## 🔧 How it workds
+## 🔧 How it works
 
 ### **1. Arduino-Based Controller**
 **Ardogame** uses an Arduino ( or any compatible microcontroller ) as the core of a modular controller .  
@@ -26,7 +26,7 @@ The Arduino reads sensor values and sends compact string message to the phone vi
 + **Bluetooth** for wireless mode
 
 ### **2. Android Game**
-On the phone, Ardogame reveives and interprets the Arduino's serial message.  
+On the phone, Ardogame receives and interprets the Arduino's serial message.  
 Each message corresponds to an in-game action or state.
 
 This allows for :
