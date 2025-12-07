@@ -35,7 +35,7 @@ This allows for :
 + **Single-player** action games
 + **Experimental** controls that go beyond touch screen limitations
 
-## ✨Features. 
+## ✨Features
 
 + 🎮 **Custom Hardware Controller** - Build your own controller using Arduino + any sensors you want.
 + 📡 **USB or Bluetooth Input** - Supports both wired and wireless communication.
