@@ -7,28 +7,25 @@ Concept:
 We created a small Arduino game where the Arduino handles all the game logic, including the movement of the meteors and the timing of the Dash.
 
 The goal of the game is simple:
-we have to move our hand over the ultrasonic sensor\potentiometer at the right moment to keep the Spaceship moving.
-If our timing is correct, the spaceship continues moving.
-If we move too early or too late, the ship crashes and the game ends.
+we have to move our hand over the **ultrasonic sensor** at the right moment to keep the Spaceship moving.  
+If our timing is correct, the spaceship continues moving.  
+If we move too early or too late, the ship crashes and the game **ends**.  
 
 As the game progresses, the meteors speed gradually increases, making the timing more challenging.
 Our score is the number of seconds we can stay alive before the game ends.
 
 It’s a fast and fun reaction game that tests precision and timing, with the Arduino controlling the logic, the ultrasonic sensor\potentiometer detecting our actions, and the phone screen displaying the game.
 
-### 🪨 Arduino-Controlled meteor Dodge Game (Android Edition)
-Play AstroDash on your phone using just your hand!
-
 ### 📌 About the Project
 
 This project is a modern twist on the classic Meteor Dodge Game, now fully playable on Android devices.
 The spaceship is controlled by your hand via an ultrasonic sensor\potentiometer connected to an Arduino Uno, which communicates directly with your phone over USB serial.
 
-✔ No keyboard or touchscreen needed
++ **No** keyboard or touchscreen needed
 
-✔ Real-time hand tracking for smooth control
++ **Real-time** hand tracking for smooth control
 
-✔ Educational project for Arduino and mobile app development
++ **Educational** project for Arduino and mobile app development
 
 
 ### 🎮 How It Works
@@ -53,7 +50,7 @@ The game runs like classic Meteor Dodging Game, including ship and meteor moveme
 
 🧪 Educational — ideal for learning Arduino, sensors, and Android development
 
-🎓 Academic & educational license
+🎓 Academic & educational  
 
 
 ### 🛠️ Hardware Required
@@ -72,28 +69,56 @@ App Developped (APK from your project)
 
 ### ⚡ Wiring Overview
 
-<div align="left"> <img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2013/11/ultrasonic-sensor-with-arduino-hc-sr04.jpg?resize=828%2C386&quality=100&strip=all&ssl=1" width="500"> </div>
+HC-SR04 → Arduino Uno
 
-<div align="right"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvoDYQRg3Vpmevni9SsJnvbCFMK4TLxAazyQ&s" width="500"> </div>
-
-HC-SR04\Potentiometer → Arduino Uno
-
-HC-SR04\Potentiometer Pin	Arduino Pin
-
-VCC	5V
-
-GND	GND
+HC-SR04 Pin	Arduino Pin
 
 TRIG	D9
 
-ECHO	D10
+ECHO	D8
 
 ### 🧩 System Architecture
 
 Hand → Ultrasonic Sensor\Potentiometer → Arduino Uno → USB Serial → Android App → Spaceship Movement
 
 ### 💻 Arduino Code (Uno)
+```c++
+void setup() {
+  Serial.begin(9600);
 
+  DDRB |= (1 << 1);    // D9 = output
+  DDRB &= ~(1 << 0);   // D8 = input
+}
+
+unsigned long ultraFastPing() {
+  // Trigger pulse 10us
+  PORTB &= ~(1 << 1);
+  delayMicroseconds(2);
+  PORTB |= (1 << 1);
+  delayMicroseconds(10);
+  PORTB &= ~(1 << 1);
+
+  // Wait HIGH
+  unsigned long start = micros();
+  while (!(PINB & (1 << 0))) {
+    if (micros() - start > 20000) return 0; // timeout
+  }
+  unsigned long echoStart = micros();
+
+  // Wait LOW
+  while (PINB & (1 << 0)) {}
+  unsigned long echoEnd = micros();
+
+  return echoEnd - echoStart;
+}
+
+void loop() {
+  unsigned long duration = ultraFastPing(); 
+  float distance = duration * 0.0343 / 2;  
+  Serial.println(distance);
+}
+
+```
 ### 📱 Android App Integration
 
 The app reads serial data from Arduino Uno via USB OTG.
@@ -115,20 +140,6 @@ Install your Android APK on the phone.
 Open the app and grant USB permission.
 
 Move your hand in front of the sensor\ use it to turn the potentiometer to control the spaceship
-
-### 👥 Team Members + roles
-
-#### Mebarki abdellah (GitHub Organisation)
-
-#### Benmessaoud razik (Project Manager)
-
-#### Aissani Anir (Hardware Specialist)
-
-#### Saighi Abd El Moumene (Software Specialist)
-
-#### Akkouche Yakoub (Game Designer)
-
-* ‼️ Note : EVERY MEMBER OF THE PROJECT DID CONTRIBUTE IN EVERY ASPECT OF THE PROJECT.
 
 ### 📄 License
 
